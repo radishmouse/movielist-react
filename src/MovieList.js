@@ -35,7 +35,11 @@ class MovieList extends React.Component {
         return (
             <ul>
                 {
-                  this.state.movies.map(movie => <li onClick={this._handleClick}>{movie}</li>)
+                  this.state.movies.map((movie, i) => (
+                    <li onClick={(event) => {
+                        this._handleClick(i)
+                    }}>{movie}</li>
+                  ))
                 }
             </ul>
         )   
@@ -43,9 +47,16 @@ class MovieList extends React.Component {
 
     // "_handleClick is an arrow function"
     // "and it is part of this class"
-    _handleClick = (event) => {
-        console.log('They clicked');
-        console.log(event.target);
+    _handleClick = (jeff) => {
+        
+        const newMovies = [
+            ...this.state.movies
+        ];
+        newMovies[jeff] += '!';
+
+        this.setState({
+            movies: newMovies
+        });
     }    
 }
 
